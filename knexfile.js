@@ -7,7 +7,7 @@ module.exports = {
     connection: {
       filename: './data/car-dealer.db3'
     },
-    useNullAsDeFault: true
+    useNullAsDefault: true
   },
 
 };
