@@ -84,6 +84,27 @@ server.put("/api/cars/:id", (req, res) => {
         })
 });
 
+
+server.delete("/api/cars/:id", (req, res) => {
+
+    database("cars")
+    .where({id: req.params.id})
+    .del()
+        .then(numberDeleted => {
+            console.log("DELETE /api/cars/:id response:", numberDeleted);
+
+            if (numberDeleted > 0)
+                { res.status(200).json(numberDeleted); }
+            else
+                { res.status(404).json({message: "No car with ID " + req.params.id + " found."}); }
+        })
+        .catch(error => {
+            console.log("DELETE /api/cars/:id error:", error);
+            res.status(500).json({message: "Couldn't DELETE at /api/cars/:id"});
+        })
+});
+
+
 const port = 5000;
 
 server.listen(port, () => {
